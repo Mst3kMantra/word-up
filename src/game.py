@@ -4,8 +4,6 @@ import utils
 import models
 import random
 from datetime import datetime
-dictionary = PyDictionary()
-colorama.init(autoreset=True)
 
 
 class WordUp:
@@ -13,6 +11,8 @@ class WordUp:
         self.seed = random.seed(datetime.now().timestamp())
 
     def main_loop(self):
+        dictionary = PyDictionary()
+        colorama.init(autoreset=True)
         while True:
             print('Welcome to WordUp, a word guessing game\n')
             print('Try and guess the word with increasing hints to increase your score!')
