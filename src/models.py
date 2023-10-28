@@ -1,5 +1,4 @@
 
-
 class Word:
     def __init__(self, name, meanings, synonyms, antonyms):
         self.name = name
