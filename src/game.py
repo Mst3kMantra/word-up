@@ -53,5 +53,9 @@ class WordUp:
                             guess = input(
                                 'Invalid input. Guess is either incorrect length or not in dictionary. Try Again').lower()
                             # todo create guess interpreter and command to display current discovered correct characters
+                        result = logic.guess_checker(guess, word.name)
+                        if result['bool']:
+                            print('')
             else:
+                input('Closing game. Press enter to close')
                 exit()
