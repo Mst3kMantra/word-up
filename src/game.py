@@ -26,7 +26,7 @@ class WordUp:
             input('Hit enter to continue')
             if game_query == 'Y':
                 game = models.Game(utils.load_word_list())
-                while game.round != 10:
+                while game.round <= 10:
                     print('-----------------------------------------------')
                     print('New round starting!')
                     print(
@@ -37,7 +37,7 @@ class WordUp:
                         random_word), dictionary.synonym(random_word), dictionary.antonym(random_word))
                     round = models.Round()
                     guess = ''
-                    while guess != word.name or round.guesses > 0:
+                    while guess != word.name and round.guesses > 0:
                         print(f'{round.guesses} left')
                         print(f'The word is {word.length}(s) long\n')
                         guess = input('Enter your guess here').lower()
