@@ -71,7 +71,8 @@ def score_add(guesses, streak):
     return points
 
 def print_hint(word):
-    if 'Noun' in word.meanings and word.meanings != None:
-        print(f'Word is a noun meaning {random.choice(word.meanings['Noun'])}\n')
-    elif 'Verb' in word.meanings and word.meanings != None:
-        print(f'Word is a verb meaning {random.choice(word.meanings['Verb'])}\n')
+    if word.meanings != None:
+        if 'Noun' in word.meanings:
+            print(f'Word is a noun meaning {random.choice(word.meanings['Noun'])}\n')
+        elif 'Verb' in word.meanings:
+            print(f'Word is a verb meaning {random.choice(word.meanings['Verb'])}\n')

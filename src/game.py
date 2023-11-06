@@ -35,9 +35,12 @@ class WordUp:
                     word = models.Word(random_word, dictionary.meaning(
                         random_word))
                     #check if word is in dictionary and request word if not in until word in dictionary found
-                    while word.meanings == None and word.length != 4:
+                    attempts = 1
+                    while word.meanings == None or word.length != 4:
+                        print(f'Invalid word, finding new word. Attempt {attempts}')
                         new_word = utils.get_example()
-                        word = models.Word(new_word, dictionary.meaning(new_word[0]))
+                        word = models.Word(new_word[0], dictionary.meaning(new_word[0]))
+                        attempts += 1
                     round = models.Round()
                     guess = ''
                     while guess != word.name and round.guesses > 0:
@@ -79,16 +82,16 @@ class WordUp:
                                 round.guesses, game.streak)
                             game.streak += 1
                             game.round += 1
-                            print(f'Correct, word was {word.name}')
+                            print(f'\nCorrect, word was {word.name}')
                             print(f'Score is {game.score} with a streak of {game.streak}')
                             input('Enter to continue\n')
                         elif result['bool'] == False:
                             round.guesses -= 1
                             round.guess_strings.append(result['string'])
-                            print(f'Incorrect guess, {round.guesses} left')
+                            print(f'\nIncorrect guess, {round.guesses} left')
                             print(result['string'])
                             if round.guesses == 0:
-                                print(f'Word was {word.name}')
+                                print(f'\nWord was {word.name}')
                                 input('Enter to continue\n')
                 print(f'Game over, final score was {game.score}')
             else:
