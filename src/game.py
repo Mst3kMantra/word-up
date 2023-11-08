@@ -16,7 +16,7 @@ class WordUp:
         while True:
             print('Welcome to WordUp, a word guessing game\n')
             print('Try and guess the 4 letter word with increasing hints to increase your score!')
-            game_query = input('Start a new game?(Y/N)').upper()
+            game_query = input('Start a new game?(Y/N)\n').upper()
             logic.bool_input_checker(game_query)
             if game_query == 'Y':
                 print('\nEnter guess when prompted, incorrect guesses will show which characters you entered that were correct. Yellow if in word and green if in word and correct location.\n')
@@ -26,10 +26,9 @@ class WordUp:
                 input('Hit enter to continue')
                 game = models.Game(utils.load_word_list())
                 while game.round <= 10:
-                    print('-----------------------------------------------')
-                    print('New round starting!')
-                    print(
-                        f'------------- Round: {game.round}------------------\n\n')
+                    print('{:-^40}'.format(''))
+                    print('{:^40}'.format('New round starting!'))
+                    print('{:-^40}\n\n'.format(f'Round: {game.round}'))
                     random_word = random.choice(game.words)
                     game.words.remove(random_word)
                     word = models.Word(random_word, dictionary.meaning(
@@ -50,9 +49,11 @@ class WordUp:
                         print(f'An example of a {word.length} letter word is {example[0]}')
                         logic.print_hint(word)
                         if len(round.guess_strings) > 0:
-                            print('\nPrevious attempts:')
+                            print('\n{:-^40}'.format(''))
+                            print('Previous attempts:')
                             for s in round.guess_strings:
                                 print(s)
+                            print('{:-^40}'.format(''))
                         guess = input('Enter your guess here\n').lower()
                         check = logic.command_checker(guess)
                         if check == True:
@@ -60,6 +61,7 @@ class WordUp:
                         elif check == False:
                             print('Skipping to next round')
                             game.round += 1
+                            print(f'Word was {word.name}')
                             break
                         while len(guess) != word.length or dictionary.meaning(guess) is None:
                             check = logic.command_checker(guess)
@@ -78,11 +80,11 @@ class WordUp:
                             break
                         result = logic.guess_checker(guess, word.name)
                         if result['bool']:
-                            game.score += logic.score_add(
-                                round.guesses, game.streak)
                             game.streak += 1
                             game.round += 1
                             print(f'\nCorrect, word was {word.name}')
+                            game.score += logic.score_add(
+                                round.guesses, game.streak)
                             print(f'Score is {game.score} with a streak of {game.streak}')
                             input('Enter to continue\n')
                         elif result['bool'] == False:
@@ -92,8 +94,10 @@ class WordUp:
                             print(result['string'])
                             if round.guesses == 0:
                                 print(f'\nWord was {word.name}')
-                                input('Enter to continue\n')
-                print(f'Game over, final score was {game.score}')
+                print('\n{:-^40}'.format(''))
+                print(f'Game over, final score was {game.score}\n')
+                print('{:-^40}\n'.format(''))
+                input('Enter to continue\n')
             else:
                 input('Closing game. Press enter to close')
                 exit()

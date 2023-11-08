@@ -38,4 +38,7 @@ def dictionary_tester():
         word = models.Word(new_word, dictionary.meaning(new_word[0]))
         print(word.meanings)
 
-dictionary_tester()
+num = 1
+print('{:-^40}'.format(''))
+print('{:^40}'.format('New round starting!'))
+print('{:-^40}\n\n'.format(f'Round: {num}'))
