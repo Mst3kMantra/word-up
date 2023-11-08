@@ -78,7 +78,7 @@ class WordUp:
                             break
                         result = logic.guess_checker(guess, word.name)
                         if result['bool']:
-                            game.score = logic.score_add(
+                            game.score += logic.score_add(
                                 round.guesses, game.streak)
                             game.streak += 1
                             game.round += 1
